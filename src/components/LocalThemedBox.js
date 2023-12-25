@@ -1,15 +1,18 @@
-import React from 'react';
-import { withTheme } from './ThemeProvider';
+import React, { useContext, useState } from 'react';
+import { ThemeContext } from './ThemeProvider';
 
-const LocalThemedBox = ({ theme }) => {
-  return (
-    <div style={{ width: '200px', height: '200px', border: '2px solid green' }} className={`bg-${theme}`} id="local-themed-box">
-      {/* Write code below this line */}
-      <p className={`txt-${theme === 'light' ? 'light' : 'dark'}`} id="local-themed-text-container">
-        Some Text
-      </p>
+
+const LocalThemedBox = () => {
+const {theme} = useContext(ThemeContext);
+const [localTheme,setLocaltheme] = useState(theme)
+return(
+    <div className={`bg-${localTheme}`} style={{width:'200px',height:'200px',border:'2px solid green'}} id="local-themed-box">
+        {/* Write code below this line */}
+        <p className={`txt-${localTheme}`}>
+            Hiiii</p>
+        <button className={`btn btn-${localTheme} txt-${localTheme}`} onClick={()=>setLocaltheme(localTheme==="light"?"dark":"light")}>Toggle</button>
     </div>
-  );
-};
+)
+}
 
-export default withTheme(LocalThemedBox);
+export { LocalThemedBox }
